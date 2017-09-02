@@ -3,6 +3,7 @@ html
   head
     title Welcome
     link(href='/stylesheets/bootstrap.css', rel='stylesheet')
+    link(href='/stylesheets/style.css', rel='stylesheet')
   body
     nav.navbar.navbar-toggleable-md.navbar-inverse.bg-inverse
       button.navbar-toggler.navbar-toggler-right(type='button', data-toggle='collapse', data-target='#navbarsExampleDefault', aria-controls='navbarsExampleDefault', aria-expanded='false', aria-label='Toggle navigation')
@@ -20,6 +21,7 @@ html
           li.nav-item
             a.nav-link(href="/users/logout") Logout
     .container
+      != messages()
       block content
      
     script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js')

@@ -5,6 +5,8 @@ var upload = multer({
   dest: "./uploads"
 });
 
+var User = require("../models/user");
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -44,12 +46,30 @@ router.post('/register', upload.single("profileimage"), function (req, res, next
 
   var errors = req.validationErrors();
 
-  if (errors)
+  if (errors) {
     res.render("register", {
       errors
     });
-  else
-    console.log("Nain Errors");
+    
+  } else {
+    var newUser = new User({
+      name,
+      email,
+      username,
+      password,
+      profileimage,
+    });
+
+    User.createUser(newUser, (err, user) => {
+      if(err) throw err;
+      console.log(user);
+    });
+
+    req.flash("success", "You are now registered and can login");
+
+    res.location("/");
+    res.redirect("/");
+  }
 
 });
 
